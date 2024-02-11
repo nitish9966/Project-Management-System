@@ -1,0 +1,39 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <!-- Add Bootstrap CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Add Tailwind CSS CDN if using Tailwind -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"> -->
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body class="bg-light">
+  <div class="container text-center mt-5">
+    <h1 class="display-4">Welcome to <%= title %></h1>
+    <p class="lead">Manage your projects efficiently!</p>
+
+    <div class="mt-4">
+      <div class="btn-group">
+        <a href="/signup?type=manager" class="btn btn-primary">Signup as Manager</a>
+        <a href="/signup?type=user" class="btn btn-success">Signup as User</a>
+      </div>
+    </div>
+
+    <a href="/login" class="btn btn-outline-primary mt-3">Login</a>
+  </div>
+  
+  <!-- Add Bootstrap JS and Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>

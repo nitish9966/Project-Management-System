@@ -1,0 +1,125 @@
+<!-- views/manager-dashboard.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Management System</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/managerdashboard.css">
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.manager-sidebar');
+      sidebar.classList.toggle('show-sidebar');
+    }
+  </script>
+  <!-- <style>
+    .manager-sidebar {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      height: 100%;
+      width: 300px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: right 0.3s ease;
+      z-index: 1000;
+    }
+
+    .show-sidebar {
+      right: 0;
+    }
+
+    .sidebar-content {
+      padding: 20px;
+    }
+  </style> -->
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="header bg-dark text-light py-3">
+      <h1 class="m-0">Project Management System</h1>
+      <button class="btn btn-light ml-auto" onclick="toggleSidebar()">Manager Info</button>
+    </div>
+
+    <!-- Manager Sidebar -->
+    <div class="manager-sidebar">
+      <div class="sidebar-content">
+        <h2>Manager Information</h2>
+        <p>Name: <%= username %></p>
+        <p>Type: Manager</p>
+        <button class="btn btn-secondary" onclick="toggleSidebar()">Close</button>
+        <a href="/logout" class="btn btn-danger mt-3">Logout</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="row main-section">
+      <!-- Assign Project Form -->
+      <div class="col-md-6">
+        <h2>Assign Project:</h2>
+        <form action="/manager/assign-task" method="post">
+          <div class="form-group">
+            <label for="taskDescription">Task Description:</label>
+            <input type="text" id="taskDescription" name="taskDescription" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="userEmail">User Email:</label>
+            <input type="email" id="userEmail" name="userEmail" class="form-control" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Assign Task</button>
+        </form>
+      </div>
+
+      <!-- Assigned Tasks -->
+      <div class="col-md-6">
+        <h2>Assigned Tasks:</h2>
+        <ul class="list-group">
+          <% tasks.forEach(task => { %>
+            <li class="list-group-item">
+              <%= task.description %> - Status: <%= task.completion_status %> - Assigned to: <%= task.user_email %>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Completed Tasks Section -->
+    <div class="row completed-section">
+      <div class="col-md-12">
+        <h2>Completed Tasks:</h2>
+        <ul class="list-group">
+          <% completedTasks.forEach(task => { %>
+            <li class="list-group-item"><%= task.description %> - Assigned to: <%= task.user_email %></li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Pending Tasks Section -->
+    <div class="row pending-section">
+      <div class="col-md-12">
+        <h2>Pending Tasks:</h2>
+        <ul class="list-group">
+          <% pendingTasks.forEach(task => { %>
+            <li class="list-group-item"><%= task.description %> - Assigned to: <%= task.user_email %></li>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Logout Link -->
+    <!-- <div class="logout-link">
+      <a href="/logout" class="btn btn-danger">Logout</a>
+    </div>
+  </div> -->
+
+  <!-- Add Bootstrap JS and Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

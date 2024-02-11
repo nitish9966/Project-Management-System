@@ -1,0 +1,25 @@
+<!-- views/dashboard.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Management Dashboard</title>
+  <link rel="stylesheet" href="/dashboard.css">
+  </head>
+<body>
+  <div class="user-info">
+    <p>Welcome, <%= username %>! (User Type: <%= userType %>)</p>
+    <a href="/logout" class="logout-link">Logout</a>
+  </div>
+  <h1>Project Management Dashboard</h1>
+  <ul class="project-list">
+    <!-- Display a list of projects here -->
+    <li class="project-item">Project 1</li>
+    <li class="project-item">Project 2</li>
+    <li class="project-item">Project 3</li>
+    <!-- Add more projects dynamically from your database -->
+  </ul>
+</body>
+</html>

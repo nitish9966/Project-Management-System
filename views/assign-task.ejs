@@ -1,0 +1,27 @@
+<!-- views/assign-task.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assign Task</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Assign Task</h1>
+  
+  <form action="/manager/assign-task" method="POST">
+    <label for="description">Task Description:</label><br>
+    <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
+
+    <label for="user_email">User Email:</label><br>
+    <input type="email" id="user_email" name="user_email" required><br>
+
+    <label for="project_id">Project ID:</label><br>
+    <input type="text" id="project_id" name="project_id" required><br>
+
+    <button type="submit">Assign Task</button>
+  </form>
+</body>
+</html>

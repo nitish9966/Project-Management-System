@@ -1,0 +1,20 @@
+{
+  "name": "projectmanagementsystem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm start",
+    "start": "npx nodemon",
+    "build:css": "tailwindcss build index.css -o public/tailwind.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.1",
+    "express-session": "^1.18.0",
+    "socket.io": "^4.7.4",
+    "tailwindcss": "^3.4.1",
+    "uuid": "^9.0.1"
+  }
+}

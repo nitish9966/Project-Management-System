@@ -1,0 +1,113 @@
+<!-- views/user-dashboard.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard</title>
+  <!-- Add Bootstrap CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/userdashboard.css">
+</head>
+
+<!-- Add this script to handle user info popup and sidebar -->
+<script>
+  function toggleSidebar() {
+    const sidebar = document.querySelector('.manager-sidebar');
+    sidebar.classList.toggle('show-sidebar');
+  }
+</script>
+
+<body>
+
+  <div class="container">
+    <div class="header bg-dark text-light py-3">
+      <h1 class="m-0">Project Management System</h1>
+      <button class="btn btn-light" onclick="toggleSidebar()" style="position: absolute; top: 40px; right: 40px;">User Info</button>
+    </div>
+
+    <!-- Manager Sidebar -->
+    <div class="manager-sidebar">
+      <div class="sidebar-content">
+        <h2>User Information</h2>
+        <p>Name: <%= username %></p>
+        <p>Type: User</p>
+        <button class="btn btn-secondary" onclick="toggleSidebar()">Close</button>
+        <a href="/logout" class="btn btn-danger mt-3">Logout</a>
+      </div>
+    </div>
+
+    <section id="tasks">
+      <!-- Your task sections here -->
+      <section id="newTasks">
+        <h2>New Tasks:</h2>
+        <ul>
+          <!-- Task iteration based on completion_status === 'New' -->
+          <% tasks.filter(task => task.completion_status === 'New').forEach(task => { %>
+            <li>
+              <%= task.description %> - Assigned by: <%= task.manager_name %> - Status: <%= task.completion_status %>
+              <form action="/user/update-status" method="POST">
+                <input type="hidden" name="taskId" value="<%= task.id %>">
+                <select name="completionStatus" class="form-control">
+                  <option value="New" selected>New</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Completed">Completed</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Update Status</button>
+              </form>
+            </li>
+          <% }); %>
+        </ul>
+      </section>
+
+      <section id="pendingTasks">
+        <h2>Pending Tasks:</h2>
+        <ul>
+          <!-- Task iteration based on completion_status === 'Pending' -->
+          <% tasks.filter(task => task.completion_status === 'Pending').forEach(task => { %>
+            <li>
+              <%= task.description %> - Assigned by: <%= task.manager_name %> - Status: <%= task.completion_status %>
+              <form action="/user/update-status" method="POST">
+                <input type="hidden" name="taskId" value="<%= task.id %>">
+                <select name="completionStatus" class="form-control">
+                  <option value="New">New</option>
+                  <option value="Pending" selected>Pending</option>
+                  <option value="Completed">Completed</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Update Status</button>
+              </form>
+            </li>
+          <% }); %>
+        </ul>
+      </section>
+
+      <section id="completedTasks">
+        <h2>Completed Tasks:</h2>
+        <ul>
+          <!-- Task iteration based on completion_status === 'Completed' -->
+          <% tasks.filter(task => task.completion_status === 'Completed').forEach(task => { %>
+            <li><%= task.description %> - Assigned by: <%= task.manager_name %> - Status: <%= task.completion_status %></li>
+          <% }); %>
+        </ul>
+      </section>
+    </section>
+    
+
+    <footer>
+      <!-- Logout button -->
+      <!-- <form action="/logout" method="GET">
+        <button type="submit" class="btn btn-danger">Logout</button>
+      </form> -->
+    </footer>
+  </div>
+
+
+  <!-- Add Bootstrap JS and Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
